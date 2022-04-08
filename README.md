@@ -21,7 +21,10 @@ res_env/Scripts/activate
  3. pip install flask-mysqldb
 ``` 
 
- 4. RUN THE SERVER -> python -m flask run
+ 4. RUN THE SERVER -> 
+   ```
+ python -m flask run
+``` 
 
               
 
