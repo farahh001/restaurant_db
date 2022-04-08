@@ -17,7 +17,7 @@ res_env/Scripts/activate
  1. https://www.youtube.com/watch?v=iw7KRwRcCwA
  2. https://phoenixnap.com/kb/install-flask
  
- 3. install all the requiremnents before running the application
+ 3. install all the requirements before running the application
   essentially
   ```
  1. pip install flask
