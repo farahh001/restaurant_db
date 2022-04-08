@@ -29,7 +29,8 @@ res_env/Scripts/activate
  3. pip install flask-mysqldb
 ``` 
 
- 4. RUN THE SERVER -> 
+ 4. You have to change the db host,username,password in main.py depending on what you have set while downloading  MySQL on phpadmin
+ 5. RUN THE SERVER -> 
    ```
  python -m flask run
 ``` 
