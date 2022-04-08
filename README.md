@@ -4,12 +4,19 @@
 1. I connected with mysql PHPMyAdmin (http://localhost/phpmyadmin). I was having issues with db configuration in workbench.
  Download phpadmin XAMP--> https://www.youtube.com/watch?v=-f8N4FEQWyY 
 3. Clone the project. Open gitbash/terminal and then Create a virtual environment 
+
+```
 python -m venv res_env
-Activate(gitbash)
+```
+
+Activation(gitbash)
 ```
 res_env/Scripts/activate
 ``` 
- ->activation is different for MAC 
+ ->activation is different for MAC. You have to create a virtual environment and activate it accordingly. The following 2 links might help
+ https://www.youtube.com/watch?v=iw7KRwRcCwA
+ https://phoenixnap.com/kb/install-flask
+ 
  3. install all the requiremnents before running the application
   essentially
   ```
