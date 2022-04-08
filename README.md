@@ -1,4 +1,4 @@
-# restaurant_db
+# Blue Bird(restaurant_finder)
 
 # Running the project locally:
 1. I connected mysql PHPMyAdmin (http://localhost/phpmyadmin). I was having issues with db configuration in workbench.
