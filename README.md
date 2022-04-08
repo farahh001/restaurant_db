@@ -1,7 +1,7 @@
 # Blue Bird(restaurant_finder)
 
 # Running the project locally:
-1. I connected mysql PHPMyAdmin (http://localhost/phpmyadmin). I was having issues with db configuration in workbench.
+1. I connected with mysql PHPMyAdmin (http://localhost/phpmyadmin). I was having issues with db configuration in workbench.
  Download phpadmin XAMP--> https://www.youtube.com/watch?v=-f8N4FEQWyY 
 3. Clone the project. Open gitbash/terminal and then Create a virtual environment 
 python -m venv res_env
