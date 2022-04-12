@@ -13,6 +13,14 @@ Activation(gitbash)
 ```
 res_env/Scripts/activate
 ``` 
+
+# Activate the virtualenv (OS X & Linux)
+$ source myproject/bin/activate
+
+# Activate the virtualenv (Windows)
+$ myproject\Scripts\activate
+
+
  ->activation is different for MAC. You have to create a virtual environment and activate it accordingly. The following 2 links might help
  1. https://www.youtube.com/watch?v=iw7KRwRcCwA
  2. https://phoenixnap.com/kb/install-flask
