@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_wtf import FlaskForm
 
 from flask_mysqldb import MySQL
 import mysql.connector
@@ -15,7 +16,6 @@ mysql =MySQL(app)
 # mydb=mysql.connector.connect(host="127.0.0.1",port="3307",user="root",passwd="farah1234",database="project-1-336")
 # mycursor=mydb.connection.cursor()
 # mycursor.execute("SELECT * FROM restaurant")
-
 
 
 
