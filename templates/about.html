@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="about.css">
+        <link rel="stylesheet" href="/static/about.css">
     </head>
 
     <body>
@@ -10,9 +10,9 @@
             <a id = "home" href = "home.html"><h1>FoodieHub</h1></a>
             
             <div class = "navbar">
-                <a id = "nav" href = "about.html">About</a>
-                <a id = "nav" href = "login.html">Login</a>
-                <a id = "nav" href = "registration.html">Register</a>
+                <a id = "nav" href = "{{ url_for('about') }}">About</a>
+                <a id = "nav" href = "{{ url_for('login') }}">Login</a>
+                <a id = "nav" href = "{{ url_for('registration') }}">Register</a>
             </div>
         </div>
 
