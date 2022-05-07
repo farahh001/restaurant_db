@@ -7,14 +7,14 @@
         <div class="hero">
             <div class="loginbox">
                 <div class="title-box">
-                    <h1>LOGIN HERE</h1>
+                    <h1>Log In</h1>
                 </div>
-                <form>
+                <form action ="{{url_for('login')}}" method ="post">
                     <p>Email</p>
                     <input type="text" name="" placeholder="Enter Your Email" required>
                     <p>Password</p>
                     <input type="password" name="" placeholder="Enter Password" required>
-                    <button type="submit" class="submit-btn">Login</button>
+                    <input type="submit" value="Login">
                     <a href="#"> Forgot your password?</a><br>
                     <a href="#"> Don't have any account?</a>
                 </form>

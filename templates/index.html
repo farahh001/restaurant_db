@@ -1,4 +1,26 @@
-<h1>Hello</h1>
-<p>Welcome.................to.........Blue Bird</p>
+<!DOCTYPE html>
 
-{{data}}
+<html lang="en">
+<head>
+        <title> Login </title>
+        <link rel="stylesheet" href="/static/login.css">
+    </head>
+    <body>
+        <div class="hero">
+            <div class="loginbox">
+                <div class="title-box">
+                    <h1>LOGIN HERE</h1>
+                </div>
+                <form action ="{{url_for('login')}}" method ="post">
+                    <p>Email</p>
+                    <input type="text" name="email" id ="email" placeholder="Enter Your Email" required>
+                    <p>Password</p>
+                    <input type="password" name="password" id ="password" placeholder="Enter Password" required>
+                    <input type="submit" value="Login">
+                    <a href="#"> Forgot your password?</a><br>
+                    <a href="{{url_for('registration')}}"> Don't have any account?</a>
+                </form>
+            </div>
+        </div>
+    </body>
+ </html>

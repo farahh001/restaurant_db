@@ -33,28 +33,24 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('/static/images/registration_background.jpg');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
-				<form class="login100-form validate-form">
+				<form action="/register" method ="POST">
 					<span class="login100-form-title p-b-49">
 						Sign Up
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
 						<span class="label-input100">Email</span>
-						<input class="input100" type="text" id="email" placeholder="Ex. youremail@gmail.com">
+						<input class="input100" type="text"  name="email" id="email" placeholder="Ex. youremail@gmail.com">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
 						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="Type your password">
+						<input class="input100" type="password" name ="password" id="password"  placeholder="Type your password">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<span class="label-input100">Retype Password</span>
-						<input class="input100" type="password" name="pass2" placeholder="Retype your password">
-						<span class="focus-input100" data-symbol="&#xf190;"></span>
-					</div>
+					
 					
 					
 				

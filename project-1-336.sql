@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 08, 2022 at 08:25 AM
+-- Generation Time: May 07, 2022 at 03:43 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -162,6 +162,33 @@ INSERT INTO `cuisine` (`restaurant_permit`, `cuisine_name`) VALUES
 (50075543, 'Chinese'),
 (50079098, 'Barbecue');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `user_id` int(11) NOT NULL,
+  `email` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(100) CHARACTER SET latin1 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_id`, `email`, `password`) VALUES
+(1, 'all@gmail.com', 'Sara1234'),
+(2, 'abc@gmail.com', '$2b$12$8pEbL8jiFfn2eGlxOjNQCO52dBVRGfTUKHB1tCpJIEjexeSybBB2m'),
+(3, 'ida@gmail.com', '$2b$12$wmSdNCBdFwjPe8FXazC0TuNmHbqQ6k9PSur.3DwtwyuQZaf/6bYP.'),
+(4, 'samiul@gmail.com', '$2b$12$rwgz6K6wWOHcwFJUJuqT7uhdh.SjMDXtaxTZ2rf1hDcFS/FWDKv9K'),
+(5, 'alan@gmail.com', '$2b$12$M81N1DFt.757ihwnPB8f5.yuJNKszGnLnfgDr7Yc09yCe42VfgbRy'),
+(6, 'ida01@gmail.com', '$2b$12$dDTPr6ZaKTQ0usxVGP.1gutUNmZFaFUDnankwuzN.5Q0lZZCWKSsG'),
+(7, 'akk@gmail.com', '$2b$12$2IleU7FGEOg2iPdUIKFIYOC9zphepyIoHWgWXIFe5O.MWdyecN7c6'),
+(8, 'ida01@gmail.com', '$2b$12$CI8ctR6.6R8WMkkQhFXEzuqan2hBFCsDxn8u7rbSNPbMchqsCSEWS'),
+(9, 'alilisaba@gmail.com', '123456');
+
 --
 -- Indexes for dumped tables
 --
@@ -189,6 +216,12 @@ ALTER TABLE `cuisine`
   ADD KEY `ï»¿restaurant_permit_idx` (`restaurant_permit`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -203,6 +236,12 @@ ALTER TABLE `address`
 --
 ALTER TABLE `boros`
   MODIFY `boro_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
