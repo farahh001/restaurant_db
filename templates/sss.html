@@ -1,26 +1,24 @@
-<!DOCTYPE html>
-
-<html lang="en">
-<head>
+<htnml>
+    <head>
         <title> Login </title>
-        <link rel="stylesheet" href="/static/login.css">
+        <link rel="stylesheet" href="login.css">
     </head>
     <body>
         <div class="hero">
             <div class="loginbox">
                 <div class="title-box">
-                    <h1>LOGIN HERE</h1>
+                    <h1>Log In</h1>
                 </div>
                 <form action ="{{url_for('login')}}" method ="post">
                     <p>Email</p>
-                    <input type="text" name="email" id ="email" placeholder="Enter Your Email" required>
+                    <input type="text" name="" placeholder="Enter Your Email" required>
                     <p>Password</p>
-                    <input type="password" name="password" id ="password" placeholder="Enter Password" required>
+                    <input type="password" name="" placeholder="Enter Password" required>
                     <input type="submit" value="Login">
                     <a href="#"> Forgot your password?</a><br>
-                    <a href="{{url_for('registration')}}"> Don't have any account?</a>
+                    <a href="#"> Don't have any account?</a>
                 </form>
             </div>
         </div>
     </body>
- </html>
+</htnml>
