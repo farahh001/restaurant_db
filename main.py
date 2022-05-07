@@ -89,6 +89,21 @@ def logout():
     session.pop('email',None)
     return redirect(url_for('login'))
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == "POST":
+        cuisine = request.form['cuisine']
+        cur =mysql.connection.cursor()
+        # search by author or book
+        #cur.execute("SELECT cuisine_name from cuisine WHERE cuisine_name LIKE %s ", (cuisine_name))
+        cur.execute ('''select * from cuisine where cuisine_name = %s''', request.form['search'])
+        if len(data) == 0 and cuisine == 'all': 
+            cur.execute("SELECT cuisine_name from cuisine")
+            
+            data = cur.fetchall()
+        return render_template('home.html', data=data)
+    return render_template('home.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
