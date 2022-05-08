@@ -55,7 +55,7 @@ def register():
         cur.execute("INSERT INTO user (email,password) VALUES(%s,%s)", (email,password))
         mysql.connection.commit()
         session['email']= email
-        return redirect(url_for("home"))
+        return redirect(url_for("inspection"))
     
   
 
@@ -77,9 +77,6 @@ def login():
             
     return render_template("login.html",msg=msg)
 
-@app.route('/registration/')
-def registration():
-    return render_template("registration.html")
 
 
 @app.route('/about/')
