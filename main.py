@@ -28,16 +28,16 @@ mysql =MySQL(app)
 
 
 @app.route('/')
-def index():
+def home():
     #cur.execute("SELECT * FROM address")
     #fetchdata =cur.fetchall()
     #cur.close()
 
-    return render_template("index.html")
+    return render_template("home.html")
 
-@app.route("/home")
-def home():
-    return render_template('home.html', email =session['email'])
+@app.route("/inspection")
+def inspection():
+    return render_template('inspection.html', email =session['email'])
 
 
 
@@ -71,23 +71,27 @@ def login():
         if record:
             session['loggedin']=True
             session['email']= record[1]
-            return redirect(url_for('home'))
+            return redirect(url_for('inspection'))
         else:
             msg='Incorrect email/Password.Try again'
             
-    return render_template("index.html",msg=msg)
+    return render_template("login.html",msg=msg)
 
 @app.route('/registration/')
 def registration():
     return render_template("registration.html")
 
 
+@app.route('/about/')
+def about():
+    return render_template("about.html")
+
 
 @app.route ('/logout')
 def logout():
     session.pop('loggedin',None)
     session.pop('email',None)
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
