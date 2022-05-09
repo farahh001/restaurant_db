@@ -1,5 +1,5 @@
 import email
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for, flash
 from flask_wtf import FlaskForm
 
 from flask_mysqldb import MySQL
@@ -32,8 +32,17 @@ def home():
     #cur.execute("SELECT * FROM address")
     #fetchdata =cur.fetchall()
     #cur.close()
+    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT  * FROM restaurants")
+    data = cur.fetchall()
+    cur.close()
 
-    return render_template("home.html")
+    
+    return render_template('inspection.html', restaurants=data )
+
+
+    
 
 @app.route("/inspection")
 def inspection():
@@ -89,6 +98,54 @@ def logout():
     session.pop('loggedin',None)
     session.pop('email',None)
     return redirect(url_for('home'))
+
+
+
+@app.route('/insert', methods = ['POST'])
+def insert():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        name = request.form['name']
+        address = request.form['address']
+        grade = request.form['grade']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO restaurants (name, address, grade) VALUES (%s, %s, %s)", (name, address, grade))
+        mysql.connection.commit()
+        return redirect(url_for('home'))
+
+
+
+
+@app.route('/delete/<string:id_data>', methods = ['GET'])
+def delete(id_data):
+    flash("Record Has Been Deleted Successfully")
+    cur = mysql.connection.cursor()
+    cur.execute("DELETE FROM restaurants WHERE id=%s", (id_data,))
+    mysql.connection.commit()
+    return redirect(url_for('home'))
+
+
+
+
+
+@app.route('/update',methods=['POST','GET'])
+def update():
+
+    if request.method == 'POST':
+        id_data = request.form['id']
+        name = request.form['name']
+        address = request.form['address']
+        grade = request.form['grade']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+               UPDATE restaurants
+               SET name=%s, address=%s, grade=%s
+               WHERE id=%s
+            """, (name, address, grade, id_data))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('home'))
 
 
 if __name__ == '__main__':

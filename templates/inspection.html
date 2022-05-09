@@ -1,53 +1,311 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>FOODIEHub</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    </head>
-    <body>
 
 
-        <nav class="navbar navbar-expand-lg" style="background-color: #db5e5e;">
-            <a class="navbar-brand text-dark font-weight-bold" href="{{url_for('home')}}">FOODIEHub</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link text-dark font-weight-bold" href="#">Contact <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link text-dark font-weight-bold" href="{{url_for('about')}}">About</a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link text-dark font-weight-bold" href="{{url_for ('logout')}}"> Log Out</a>
-                </li>
-              </ul>
-              <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-dark font-weight-bold my-2 my-sm-0" type="submit">Search</button>
-              </form>
-            </div>
-        </nav>
+
+{% include "header_inspect.html" %}
+
+<link href="{{url_for('static', filename = 'css2/bootstrap.min.css')}}" rel="stylesheet">
+
+{% block body %}
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col md-12">
 
 
-        <h1>Welcome to Inspection</h1>
 
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    </body>
-</html>
+            <h2>Restaurant List <button type="button" class="btn btn-dark  pull-right" data-toggle="modal" data-target="#myModal">Add Restaurant Data</button></h2>
 
+
+
+
+    {%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+
+    </div>
+
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+
+
+
+            <table class="table table-striped">
+
+
+                <tr>
+              <th>Serial</th>
+              <th>Name</th>
+              <th>Address</th>
+              <th>Grade</th>
+              <th>Action</th>
+
+
+          </tr>
+
+
+
+
+
+                {% for row in restaurants %}
+                <tr>
+                    <td>{{row.0}}</td>
+                    <td>{{row.1}}</td>
+                    <td>{{row.2}}</td>
+                    <td>{{row.3}}</td>
+                    <td>
+
+
+               <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                <a href="/delete/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+
+                    </td>
+
+                </tr>
+
+                <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Update Information</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{ url_for('update') }}" method="POST">
+
+
+               <div class="form-group">
+
+
+                  <label>Name:</label>
+                   <input type="hidden"  name="id" value="{{row.0}}">
+
+                  <input type="text" class="form-control" name="name" value="{{row.1}}">
+
+
+               </div>
+
+
+
+               <div class="form-group">
+
+
+                  <label>Adress:</label>
+
+                  <input type="text" class="form-control" name="address" value="{{row.2}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <label>Grade:</label>
+
+                  <input type="text" class="form-control" name="grade" value="{{row.3}}">
+
+
+               </div>
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Update</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+                {% endfor  %}
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+<!-- Modal -->
+
+
+<div id="myModal" class="modal fade" role="dialog">
+
+
+   <div class="modal-dialog">
+
+
+      <div class="modal-content">
+
+
+         <div class="modal-header">
+
+
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+            <h4 class="modal-title">Please Insert Data</h4>
+
+
+         </div>
+
+
+         <div class="modal-body">
+
+
+            <form action="{{ url_for('insert') }}" method="POST">
+
+
+               <div class="form-group">
+
+
+                  <label>Name:</label>
+                  <input type="text" class="form-control" name="name" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Address:</label>
+                  <input type="text" class="form-control" name="address" required="1">
+
+
+               </div>
+
+
+                <div class="form-group">
+
+
+                  <label>Grade:</label>
+                  <input type="text" class="form-control" name="grade" required="1">
+
+
+               </div>
+
+
+
+               <div class="form-group">
+
+
+                  <button class="btn btn-primary" type="submit">Insert Data</button>
+
+
+               </div>
+
+
+            </form>
+
+
+         </div>
+
+
+         <div class="modal-footer">
+
+
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+         </div>
+
+
+      </div>
+
+
+   </div>
+
+
+</div>
+
+
+
+
+  
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+
+<script type="text/javascript" src="{{url_for('static', filename='js2/jquery-3.2.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{url_for('static', filename = 'js2/bootstrap.min.js')}}"></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+   
+
+
+
+
+
+
+       
             
          
