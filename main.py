@@ -39,24 +39,34 @@ def home():
     cur.close()
 
     
-    return render_template('inspection.html', restaurants=data )
+    return render_template('home.html', restaurants=data )
 
+
+@app.route('/inspection')
+def inspection():
+    #cur.execute("SELECT * FROM address")
+    #fetchdata =cur.fetchall()
+    #cur.close()
+    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT  * FROM restaurants")
+    data = cur.fetchall()
+    cur.close()
 
     
-
-@app.route("/inspection")
-def inspection():
-    return render_template('inspection.html', email =session['email'])
+    return render_template('inspection.html', restaurants=data )
 
 
 
 @app.route('/register', methods =['GET','POST'])
 def register():
+    
     if request.method == 'GET':
         return render_template("registration.html")
     else:
         email=request.form['email']
         password=request.form['password']
+        flash("You are successfully registered as an Inspector")
         
         
         # returns True
@@ -64,7 +74,8 @@ def register():
         cur.execute("INSERT INTO user (email,password) VALUES(%s,%s)", (email,password))
         mysql.connection.commit()
         session['email']= email
-        return redirect(url_for("inspection"))
+        
+        return redirect(url_for("register"))
     
   
 
