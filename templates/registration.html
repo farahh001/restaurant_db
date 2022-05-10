@@ -27,11 +27,35 @@
 	
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/static/registration_css/main.css" />
+
 </head>
 <body>
 	
+	{%with messages = get_flashed_messages()%}
+
+    {%if messages%}
+
+    {% for message in messages %}
+
+    <div class="alert alert-success alert-dismissable" role="alert">
+
+     <button type="button" class="close" data-dismiss="alert" aria-label ="close">
+
+         <span aria-hidden="true">&times;</span>
+
+     </button>
+        {{message}}
+
+
+    </div>
+
+
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('/static/images/registration_background.jpg');">
+		<div class="container-login100" style="background-image: url('/static/images/food-trends.png');">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form action="/register" method ="POST">
 					<span class="login100-form-title p-b-49">
@@ -39,22 +63,17 @@
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
-						<span class="label-input100">Email</span>
+					
 						<input class="input100" type="text"  name="email" id="email" placeholder="Ex. youremail@gmail.com">
 						<span class="focus-input100" data-symbol="&#xf206;"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<span class="label-input100">Password</span>
+						
 						<input class="input100" type="password" name ="password" id="password"  placeholder="Type your password">
 						<span class="focus-input100" data-symbol="&#xf190;"></span>
 					</div>
 
-					
-					
-					
-				
-					
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
@@ -65,9 +84,9 @@
 					</div>
 
 					<div class="txt1 text-center p-t-54 p-b-20">
-						<span>
-							Or Sign Up Using
-						</span>
+					
+						<a class="navbar-brand text-dark font-weight-bold" href="{{url_for('login')}}">Or Sign IN</a>
+					
 					</div>
 
 					<div class="flex-c-m">
@@ -92,6 +111,8 @@
 	
 
 	<div id="dropDownSelect1"></div>
+
+
 	
 <!--===============================================================================================-->
 	<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
