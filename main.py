@@ -123,7 +123,7 @@ def insert():
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO restaurants (name, address, grade) VALUES (%s, %s, %s)", (name, address, grade))
         mysql.connection.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('inspection'))
 
 
 
@@ -134,7 +134,7 @@ def delete(id_data):
     cur = mysql.connection.cursor()
     cur.execute("DELETE FROM restaurants WHERE id=%s", (id_data,))
     mysql.connection.commit()
-    return redirect(url_for('home'))
+    return redirect(url_for('inspection'))
 
 
 
@@ -156,7 +156,7 @@ def update():
             """, (name, address, grade, id_data))
         flash("Data Updated Successfully")
         mysql.connection.commit()
-        return redirect(url_for('home'))
+        return redirect(url_for('inspection'))
 
 
 if __name__ == '__main__':
