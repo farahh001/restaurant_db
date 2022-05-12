@@ -4,11 +4,15 @@ from django.db import connection
 from flask import Flask, redirect, render_template, request, session, url_for, flash, g
 
 from flask_wtf import FlaskForm
-
+import urllib.request
+import os
+from werkzeug.utils import secure_filename
 from flask_mysqldb import MySQL
 import mysql.connector
 
 app = Flask(__name__)
+
+UPLOAD_FOLDER = 'static/uploads/'
 
 #add database
 app.config['MYSQL_HOST'] ='localhost'
@@ -17,6 +21,13 @@ app.config['MYSQL_PASSWORD'] =''
 app.config['MYSQL_DB'] ='project-1-336'
 #
 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+ 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app.secret_key = "super secret key"
 app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://root:f1234@localhost/project-1-336'
@@ -92,10 +103,12 @@ def login():
             session['email']= record[1]
             return redirect(url_for('inspection'))
         else:
-            flash("Incorrect Password")
-            msg='Incorrect email/Password.Try again'
+            flash("Incorrect email/Password.Try again")
+            
             
     return render_template("login.html",msg=msg)
+
+
 
 
 
@@ -103,21 +116,21 @@ def login():
 def about():
     return render_template("about.html")
 
-@app.route('/inspectorLogin.html')
-def inspectorLogin():
-    if g.user:
-        render_template("inspectorLogin.html", email =session['email'])
-    else:
-        redirect(url_for('login'))
-        
-@app.before_request
-def before_request():
-    g.user = None
-    if 'email' in session:
-        g.user = session['email']
-        
 
 
+        
+
+    
+    
+    
+    
+    
+        
+        
+        
+    
+        
+        
 @app.route ('/logout')
 def logout():
     session.pop('loggedin',None)
@@ -171,6 +184,35 @@ def update():
         flash("Data Updated Successfully")
         mysql.connection.commit()
         return redirect(url_for('inspection'))
+    
+@app.route('/restaurant')
+def restaurant():
+    return render_template('restaurant.html')
+    
+    
+@app.route('/', methods=['POST'])
+def upload_image():
+    if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
+        
+        return render_template('restaurant.html', filename=filename)
+    else:
+        flash('Allowed image types are - png, jpg, jpeg, gif')
+        return redirect(request.url)
+ 
+@app.route('/display/<filename>')
+def display_image(filename):
+    #print('display_image filename: ' + filename)
+    return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
 if __name__ == '__main__':
