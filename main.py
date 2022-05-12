@@ -21,9 +21,7 @@ app.secret_key = "super secret key"
 app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://root:f1234@localhost/project-1-336'
 mysql =MySQL(app)
 
-# mydb=mysql.connector.connect(host="127.0.0.1",port="3307",user="root",passwd="farah1234",database="project-1-336")
-# mycursor=mydb.connection.cursor()
-# mycursor.execute("SELECT * FROM restaurant")
+
 
 
 @app.route('/')
@@ -66,7 +64,7 @@ def register():
     else:
         email=request.form['email']
         password=request.form['password']
-        flash("You are successfully registered as an Inspector")
+        flash("You are successfully registered")
         
         
         # returns True
