@@ -1,14 +1,13 @@
 import email
+from socket import create_connection
+from django.db import connection
 from flask import Flask, redirect, render_template, request, session, url_for, flash
 from flask_wtf import FlaskForm
 
 from flask_mysqldb import MySQL
 import mysql.connector
 
-
-
 app = Flask(__name__)
-
 
 #add database
 app.config['MYSQL_HOST'] ='localhost'
@@ -58,6 +57,7 @@ def inspection():
 
 
 
+
 @app.route('/register', methods =['GET','POST'])
 def register():
     
@@ -102,6 +102,11 @@ def login():
 @app.route('/about/')
 def about():
     return render_template("about.html")
+
+@app.route('/inspectorLogin.html')
+def inspectorLogin():
+    render_template("inspectorLogin.html")
+    
 
 
 @app.route ('/logout')

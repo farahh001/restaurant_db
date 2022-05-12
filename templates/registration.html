@@ -28,8 +28,13 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="/static/registration_css/main.css" />
 
+
+
 </head>
 <body>
+
+	
+
 	
 	{%with messages = get_flashed_messages()%}
 
@@ -55,7 +60,7 @@
     {%endwith%}
 
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('/static/images/food-trends.png');">
+		<div class="container-login100">
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form action="/register" method ="POST">
 					<span class="login100-form-title p-b-49">
@@ -82,26 +87,21 @@
 							</button>
 						</div>
 					</div>
+					<div>
+						
+						<bbutton>
+							<a href="{{url_for('login')}}">or Sign In</a>
+						</bbutton>
+						
+							
+					</div>
 
-					<div class="txt1 text-center p-t-54 p-b-20">
-					
-						<a class="navbar-brand text-dark font-weight-bold" href="{{url_for('login')}}">Or Sign IN</a>
 					
 					</div>
 
-					<div class="flex-c-m">
-						<a href="#" class="login100-social-item bg1">
-							<i class="fa fa-facebook"></i>
-						</a>
+					
 
-						<a href="#" class="login100-social-item bg2">
-							<i class="fa fa-twitter"></i>
-						</a>
-
-						<a href="#" class="login100-social-item bg3">
-							<i class="fa fa-google"></i>
-						</a>
-					</div>
+				
 
 		
 				</form>

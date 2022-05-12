@@ -32,8 +32,8 @@
   [ RESTYLE TAG ]*/
   
   * {
-      margin: 0px; 
-      padding: 0px; 
+      margin: 10px; 
+      padding: 10px; 
       box-sizing: border-box;
   }
   
@@ -61,7 +61,7 @@
   
   a:hover {
       text-decoration: none;
-    color: #a64bf4;
+    color: #00dbde;
   }
   
   /*---------------------------------------------*/
@@ -159,11 +159,38 @@
   /*//////////////////////////////////////////////////////////////////
   [ login ]*/
   .limiter {
-    width: 100%;
+    width: 50%;
     margin: 0 auto;
+    
   }
   
   .container-login100 {
+    width: 100%;  
+    height: 50%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 25x;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  
+  .wrap-login100 {
+    width: 500px;
+    background: #fff;
+    border-radius: 100px;
+    overflow: hidden;
+    align-items: center;
+    
+  }
+
+  .container-login1001 {
     width: 100%;  
     min-height: 100vh;
     display: -webkit-box;
@@ -178,13 +205,14 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    overflow: hidden;
   }
   
-  .wrap-login100 {
+  .wrap-login1001 {
     width: 500px;
     background: #fff;
     border-radius: 10px;
-    overflow: hidden;
+    
   }
   
   
@@ -194,6 +222,10 @@
   .login100-form {
     width: 100%;
   }
+  .login1001-form {
+    width: 100%;
+  }
+  
   
   .login100-form-title {
     display: block;
@@ -335,11 +367,11 @@
     z-index: -1;
     width: 300%;
     height: 100%;
-    background: #4bf47b;
-    background: -webkit-linear-gradient(right, #00de30b7, #00de30b7, #00dbde, #88ff00);
-    background: -o-linear-gradient(right, #00dbde, #88ff00, #00dbde, #88ff00);
-    background: -moz-linear-gradient(right, #00dbde, #88ff00, #aade00, #fbff00);
-    background: linear-gradient(right, #00dbde, #88ff00, #00dbde, #88ff00);
+    background: rgb(47, 47, 147);
+    background: -webkit-linear-gradient(right, rgb(47, 47, 147), rgb(47, 47, 147), #00dbde, #757dcd);
+    background: -o-linear-gradient(right, #00dbde, #757dcd, #00dbde, #757dcd);
+    background: -moz-linear-gradient(right, #00dbde, #757dcd, #757dcd, #fbff00);
+    background: linear-gradient(right, #00dbde, #757dcd, #00dbde, #757dcd);
     top: 0;
     left: -100%;
   
@@ -348,6 +380,8 @@
     -moz-transition: all 0.4s;
     transition: all 0.4s;
   }
+
+
   
   .login100-form-btn {
     font-family: Poppins-Medium;
@@ -365,13 +399,16 @@
     align-items: center;
     padding: 0 20px;
     width: 100%;
-    height: 50px;
+    height: 75px;
   }
   
   .wrap-login100-form-btn:hover .login100-form-bgbtn {
     left: 0;
   }
   
+  .wrap-login1001-form-btn:hover .login1001-form-bgbtn {
+    left: 0;
+  }
   
   /*------------------------------------------------------------------
   [ Alert validate ]*/
@@ -387,7 +424,7 @@
     background-color: #fff;
     border: 1px solid #c80000;
     border-radius: 2px;
-    padding: 4px 25px 4px 10px;
+    padding: 4px 25px 4px 100px;
     bottom: calc((100% - 20px) / 2);
     -webkit-transform: translateY(50%);
     -moz-transform: translateY(50%);
@@ -549,11 +586,12 @@
   body {
       font-size: 12px;
       font-family: sans-serif;
-      background: transparent;
+      background: url('/static/images/food-trends.png');
+      
   }
   h1 {
       text-align: center;
-      margin: 40px 0 40px;
+      margin: 40px 0 400px;
       text-align: center;
       font-size: 30px;
       color: #ecf0f1;
@@ -580,7 +618,10 @@
     padding: 20px 50px 150px;
     font-size: 13px;
     text-align: center;
-    background: trans;
+    overflow: hidden;
+
+    background: cover;
+    
     
   }
   
@@ -632,7 +673,7 @@
     -transition: opacity 0.2s;
   }
   ul li ul li { 
-    background: yellowgreen; 
+    background: lightblue; 
     display: block; 
     color: lightgrey;
     text-shadow: 0 -1px 0 #000;
@@ -642,4 +683,45 @@
     display: block;
     opacity: 1;
     visibility: visible;
+  }
+
+  bbutton {
+    display: inline-block;
+    background-color: #00dbde;
+    border-radius: 10px;
+    border: 4px double #cccccc;
+    color: #00dbde;
+    text-align: center;
+    font-size: 30px;
+    
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+  bbutton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  bbutton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 1;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  bbutton:hover {
+    background-color: lightslategray;
+  }
+  bbutton:hover span {
+    padding-right: 25px;
+  }
+  bbutton:hover span:after {
+    opacity: 0;
+    right: 0;
+    color: white;
   }
