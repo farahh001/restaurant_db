@@ -1,7 +1,8 @@
 import email
 from socket import create_connection
 from django.db import connection
-from flask import Flask, redirect, render_template, request, session, url_for, flash
+from flask import Flask, redirect, render_template, request, session, url_for, flash, g
+
 from flask_wtf import FlaskForm
 
 from flask_mysqldb import MySQL
@@ -91,6 +92,7 @@ def login():
             session['email']= record[1]
             return redirect(url_for('inspection'))
         else:
+            flash("Incorrect Password")
             msg='Incorrect email/Password.Try again'
             
     return render_template("login.html",msg=msg)
@@ -103,8 +105,17 @@ def about():
 
 @app.route('/inspectorLogin.html')
 def inspectorLogin():
-    render_template("inspectorLogin.html")
-    
+    if g.user:
+        render_template("inspectorLogin.html", email =session['email'])
+    else:
+        redirect(url_for('login'))
+        
+@app.before_request
+def before_request():
+    g.user = None
+    if 'email' in session:
+        g.user = session['email']
+        
 
 
 @app.route ('/logout')
