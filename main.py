@@ -36,7 +36,7 @@ def home():
     #cur.close()
     
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM restaurants")
+    cur.execute("SELECT  * FROM restaurants where grade = 'A'")
     data = cur.fetchall()
     cur.close()
 
@@ -57,6 +57,21 @@ def inspection():
 
     
     return render_template('inspection.html', restaurants=data )
+
+
+@app.route('/complaint')
+def complaint():
+    #cur.execute("SELECT * FROM address")
+    #fetchdata =cur.fetchall()
+    #cur.close()
+    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT  * FROM complaint")
+    data = cur.fetchall()
+    cur.close()
+
+    
+    return render_template('complaint.html', complaint=data )
 
 
 
@@ -126,6 +141,20 @@ def insert():
         cur.execute("INSERT INTO restaurants (name, address, grade) VALUES (%s, %s, %s)", (name, address, grade))
         mysql.connection.commit()
         return redirect(url_for('inspection'))
+    
+    
+
+@app.route('/inserts', methods = ['POST'])
+def inserts():
+
+    if request.method == "POST":
+        flash("Data Inserted Successfully")
+        name = request.form['name']
+        complaint = request.form['complaint']
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO complaint (name, complaint) VALUES (%s, %s)", (name, complaint))
+        mysql.connection.commit()
+        return redirect(url_for('complaint'))
 
 
 
@@ -137,6 +166,7 @@ def delete(id_data):
     cur.execute("DELETE FROM restaurants WHERE id=%s", (id_data,))
     mysql.connection.commit()
     return redirect(url_for('inspection'))
+
 
 
 
@@ -159,6 +189,26 @@ def update():
         flash("Data Updated Successfully")
         mysql.connection.commit()
         return redirect(url_for('inspection'))
+    
+    
+    
+
+@app.route('/updates',methods=['POST','GET'])
+def updates():
+
+    if request.method == 'POST':
+        id_data = request.form['id']
+        name = request.form['name']
+        complaint = request.form['complaint']
+        cur = mysql.connection.cursor()
+        cur.execute("""
+               UPDATE complaint
+               SET name=%s, complaint=%s
+               WHERE id=%s
+            """, (name, complaint, id_data))
+        flash("Data Updated Successfully")
+        mysql.connection.commit()
+        return redirect(url_for('complaint'))
 
 @app.route('/contact', methods = ['POST','GET'])
 def contact():
