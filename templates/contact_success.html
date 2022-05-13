@@ -52,14 +52,14 @@
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link text-dark font-weight-bold" href="{{url_for('blog')}}">Blog</a>
-              </li>
+                </li>
+
                 <li class="nav-item active">
                   <a class="nav-link text-dark font-weight-bold" href="{{url_for('login')}}">Login</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link text-dark font-weight-bold" href="{{url_for('register')}}">Register</a>
                 </li>
-
               </ul>
             </div>
         </nav>
@@ -70,20 +70,12 @@
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                   <div class="card shadow-2-strong" style="border-radius: 1rem;">
                     <div class="card-body p-5 text-center">
-                        <h1>About Us</h1>
-                        <p>We are all computer science students at The City College of New York.
-                            This project was a collaboration amongst the four of us for our CSC 33600 class
-                            (Intro to Database Systems). The purpose of this project was to understand how to 
-                            design a database given a dataset, and then creating a fullstack application for ease
-                            of access of the database.
+                        <h1>Success!</h1>
+                        <p>Your have successfully contacted us, Please allow some time 
+                            and we will get back to you!
                         </p>
-                       
-                        <p>
-                            This project implements the use of various technologies including, MySQL,
-                            Flask, Xammp. The following languages were used to build this application: 
-                            Python, SQL, javascript, html, and css.
-                        </p> 
-          
+                        <p> Want to conact us again? </p>                     
+                        <a class="nav-link text-dark font-weight-bold" href="{{url_for('contact')}}">Click Here</a>
                     </div>
                   </div>
                 </div>
@@ -104,5 +96,3 @@
     
     </body>
 </html>
-
-

@@ -15,7 +15,7 @@
     
         <style> 
             body {
-              background-image: url("https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F9%2F2022%2F02%2F15%2Fguide-to-homemade-pizza-FT-MAG0322.jpg");
+              
               background-color: #cccccc;
               background-repeat: no-repeat;
             }
@@ -51,43 +51,33 @@
                   <a class="nav-link text-dark font-weight-bold" href="{{url_for('contact')}}">Contact <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link text-dark font-weight-bold" href="{{url_for('blog')}}">Blog</a>
-              </li>
-                <li class="nav-item active">
                   <a class="nav-link text-dark font-weight-bold" href="{{url_for('login')}}">Login</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link text-dark font-weight-bold" href="{{url_for('register')}}">Register</a>
                 </li>
-
               </ul>
             </div>
         </nav>
 
         <section class="vh-100">
             <div class="container py-5 h-100">
-              <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                  <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-                        <h1>About Us</h1>
-                        <p>We are all computer science students at The City College of New York.
-                            This project was a collaboration amongst the four of us for our CSC 33600 class
-                            (Intro to Database Systems). The purpose of this project was to understand how to 
-                            design a database given a dataset, and then creating a fullstack application for ease
-                            of access of the database.
-                        </p>
-                       
-                        <p>
-                            This project implements the use of various technologies including, MySQL,
-                            Flask, Xammp. The following languages were used to build this application: 
-                            Python, SQL, javascript, html, and css.
-                        </p> 
-          
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+                <h1>Discussions</h1> 
+                <a class="nav-link text-dark font-weight-bold" href="{{url_for('post')}}"><h3>Create Post</h3></a>
+                
+                    {% for row in data %}
+                        <div class = "card shadow-2-strong" style = "border-radius: 1rem;">
+                            <div class="card-body p-4">
+                                <h3>{{row.0}}</h3> <a class="nav-link text-dark font-weight-bold" href="{{url_for('discussion')}}"> View Post</a>
+                            </div>
+                        </div>
+                        <br>
+                    {%endfor%}
+                        
+
+                
+                
             </div>
         </section>
     
@@ -104,5 +94,3 @@
     
     </body>
 </html>
-
-

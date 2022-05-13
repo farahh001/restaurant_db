@@ -5,6 +5,8 @@ from flask_wtf import FlaskForm
 from flask_mysqldb import MySQL
 import mysql.connector
 
+from forms import ContactForm
+
 
 
 app = Flask(__name__)
@@ -13,13 +15,13 @@ app = Flask(__name__)
 #add database
 app.config['MYSQL_HOST'] ='localhost'
 app.config['MYSQL_USER'] ='root'
-app.config['MYSQL_PASSWORD'] =''
-app.config['MYSQL_DB'] ='project-1-336'
+app.config['MYSQL_PASSWORD'] ='2041'
+app.config['MYSQL_DB'] ='project-2-336'
 #
 
 
 app.secret_key = "super secret key"
-app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://root:f1234@localhost/project-1-336'
+app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://root:f1234@localhost/project-2-336'
 mysql =MySQL(app)
 
 # mydb=mysql.connector.connect(host="127.0.0.1",port="3307",user="root",passwd="farah1234",database="project-1-336")
@@ -158,6 +160,73 @@ def update():
         mysql.connection.commit()
         return redirect(url_for('inspection'))
 
+@app.route('/contact', methods = ['POST','GET'])
+def contact():
+    form = ContactForm()
+    if request.method == 'POST':
+        name = request.form["name"]
+        email = request.form["email"]
+        subject = request.form["subject"]
+        message = request.form["message"]
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO contact (name, email, subject, message) VALUES (%s,%s,%s,%s)",(name, email, subject, message,))
+        mysql.connection.commit()
+        print("Data saved!")
+        return redirect(url_for("contact_success"))
+    else:    
+        return render_template("contact.html", form = form) 
+
+
+@app.route('/contact_success/')
+def contact_success():
+    return render_template("contact_success.html")
+
+
+@app.route('/post/', methods = ['POST', 'GET'])
+def post():
+    if request.method == "POST":
+        subject = request.form["subject"]       
+        if  (not subject):
+            flash('Post cannot be empty', category= 'error')
+        else:
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO blog_post (subject) VALUES (%s)", (subject,))
+            mysql.connection.commit()
+            return redirect(url_for("blog"))
+    return render_template("post.html")
+
+
+@app.route('/blog/', methods = ['POST', 'GET'])
+def blog():
+    if request.method == 'GET':
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT subject FROM blog_post")
+            data = list(cur.fetchall())
+            cur.execute("SELECT post_id FROM blog_post")
+            ids = list(cur.fetchall())
+            cur.close()
+
+    
+    return render_template("blog.html", data = data, ids = ids)
+
+@app.route('/discussion/', methods = ['POST', 'GET'])
+def discussion():
+    if request.method == 'GET':
+            cur = mysql.connection.cursor()
+            cur.execute("SELECT comment FROM blog_com WHERE post_id = %s",(1,))
+            comment =cur.fetchall()
+            cur.close()
+            return render_template("post_discussion.html", comment = comment)
+
+    elif request.method =='POST':
+            data = request.form.get("comment")
+            cur = mysql.connection.cursor()
+            cur.execute("INSERT INTO blog_com (post_id,comment) VALUES (%s,%s)", (1, data,))
+            mysql.connection.commit()
+            return redirect(url_for("discussion"))
+    
+
+    
 
 if __name__ == '__main__':
     app.run(debug=True)

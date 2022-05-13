@@ -21,11 +21,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link text-dark font-weight-bold" href="#">Contact <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-dark font-weight-bold" href="{{url_for('contact')}}">Contact <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
               <a class="nav-link text-dark font-weight-bold" href="{{url_for('about')}}">About</a>
             </li>
+            <li class="nav-item active">
+              <a class="nav-link text-dark font-weight-bold" href="{{url_for('blog')}}">Blog</a>
+          </li>
             <li class="nav-item active">
               <a class="nav-link text-dark font-weight-bold" href="{{url_for('login')}}">Login</a>
             </li>
