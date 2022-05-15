@@ -36,7 +36,7 @@ def home():
     #cur.close()
     
     cur = mysql.connection.cursor()
-    cur.execute("SELECT  * FROM restaurants where grade = 'A'")
+    cur.execute("SELECT  * FROM restaurants")
     data = cur.fetchall()
     cur.close()
 
