@@ -1,4 +1,6 @@
 # Blue Bird(restaurant_finder)
+A detailed version of our application can be found in the tutorial video linked below
+https://drive.google.com/file/d/1Rf6Xyq7Mwyedkrm934sWtt5_JQAjh0fx/view?usp=sharing
 
 # Running the project locally:
 1. I connected with mysql PHPMyAdmin (http://localhost/phpmyadmin). I was having issues with db configuration in workbench.
