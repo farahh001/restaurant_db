@@ -4,7 +4,7 @@ from flask_wtf import FlaskForm
 
 from flask_mysqldb import MySQL
 import mysql.connector
-
+from forms import ContactForm
 
 
 
