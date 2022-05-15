@@ -15,13 +15,13 @@ app = Flask(__name__)
 #add database
 app.config['MYSQL_HOST'] ='localhost'
 app.config['MYSQL_USER'] ='root'
-app.config['MYSQL_PASSWORD'] ='2041'
-app.config['MYSQL_DB'] ='project-2-336'
+app.config['MYSQL_PASSWORD'] =''
+app.config['MYSQL_DB'] ='project-1-336'
 #
 
 
 app.secret_key = "super secret key"
-app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://root:f1234@localhost/project-2-336'
+app.config['SQLALCHEMY_DATABASE_URI'] ='mysql://root:f1234@localhost/project-1-336'
 mysql =MySQL(app)
 
 # mydb=mysql.connector.connect(host="127.0.0.1",port="3307",user="root",passwd="farah1234",database="project-1-336")
