@@ -5,7 +5,6 @@ from flask_wtf import FlaskForm
 from flask_mysqldb import MySQL
 import mysql.connector
 
-from forms import ContactForm
 
 
 
@@ -15,8 +14,8 @@ app = Flask(__name__)
 #add database
 app.config['MYSQL_HOST'] ='localhost'
 app.config['MYSQL_USER'] ='root'
-app.config['MYSQL_PASSWORD'] =''
-app.config['MYSQL_DB'] ='project-1-336'
+app.config['MYSQL_PASSWORD'] =''            #***User may insert their mysql password here
+app.config['MYSQL_DB'] ='project-2-336'
 #
 
 
@@ -103,7 +102,7 @@ def register():
         
         # returns True
         cur =mysql.connection.cursor()
-        cur.execute("INSERT INTO user (email,password) VALUES(%s,%s)", (email,password))
+        cur.execute("INSERT INTO user (email,password, roleId) VALUES(%s,%s, %s)", (email,password, 1))
         mysql.connection.commit()
         session['email']= email
         
