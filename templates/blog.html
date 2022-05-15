@@ -11,14 +11,18 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    
-    
+        <link rel="stylesheet" type="text/css" href="/static/blog.css" />
+  
         <style> 
             body {
               
               background-color: #cccccc;
               background-repeat: no-repeat;
             }
+         
+     
+            
+            
         </style>
 
         <!-- Font Awesome -->
@@ -64,7 +68,11 @@
             <div class="container py-5 h-100">
 
                 <h1>Discussions</h1> 
-                <a class="nav-link text-dark font-weight-bold" href="{{url_for('post')}}"><h3>Create Post</h3></a>
+                <button class="favorite styled"
+                        type="button">
+                        <a class="nav-link text-dark font-weight-bold" href="{{url_for('post')}}"><h3>Create Post</h3></a>
+                </button>
+                
                 
                     {% for row in data %}
                         <div class = "card shadow-2-strong" style = "border-radius: 1rem;">
