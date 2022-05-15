@@ -63,7 +63,7 @@
         <section class="vh-100">
             <div class="container py-5 h-100">
 
-                <h1>Thread</h1> 
+                <h1>{{subject[0][0]}}</h1> 
                 <a class="nav-link text-dark font-weight-bold" href="{{url_for('blog')}}"><h5>Look at more Discussions</h5></a>
                 <form method = 'POST'>
                     <div class="form-group">
@@ -74,11 +74,19 @@
                               <button type="submit" class = "navbar-toggler"><h6>Add Comment</h4></button>
                           </div> 
                   </form>
+                  {% for row in comments %}
+                  <div class = "card shadow-2-strong" style = "border-radius: 1rem;">
+                      <div class="card-body p-4">
+                          <td>{{row[0]}}</td></a>
+                      </div>
+                  </div>
+                  <br>
+              {%endfor%}
                 <section method = 'GET'>
                     {% for row in comment %}
                         <div class = "card shadow-2-strong" style = "border-radius: 1rem;">
                             <div class="card-body p-4">
-                                <td>{{row.0}}</td></a>
+                                <td>{{row[0]}}</td></a>
                             </div>
                         </div>
                         <br>

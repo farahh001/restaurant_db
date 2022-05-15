@@ -68,8 +68,11 @@
                 
                     {% for row in data %}
                         <div class = "card shadow-2-strong" style = "border-radius: 1rem;">
-                            <div class="card-body p-4">
-                                <h3>{{row.0}}</h3> <a class="nav-link text-dark font-weight-bold" href="{{url_for('discussion')}}"> View Post</a>
+                            <div class="card-body p-4">  
+                              <h3>{{row[1]}}</h3> 
+
+                              <a class="nav-link text-dark font-weight-bold" href="/discussion/{{row[0]}}"> View Post</a>
+                              
                             </div>
                         </div>
                         <br>

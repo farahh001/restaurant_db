@@ -1,5 +1,5 @@
 import email
-from flask import Flask, redirect, render_template, request, session, url_for, flash
+from flask import Flask, redirect, render_template, request, session, url_for, flash , Blueprint
 from flask_wtf import FlaskForm
 
 from flask_mysqldb import MySQL
@@ -250,31 +250,40 @@ def post():
 def blog():
     if request.method == 'GET':
             cur = mysql.connection.cursor()
-            cur.execute("SELECT subject FROM blog_post")
-            data = list(cur.fetchall())
-            cur.execute("SELECT post_id FROM blog_post")
-            ids = list(cur.fetchall())
-            cur.close()
+            cur.execute("SELECT * FROM blog_post")
+            #id = listToDict(rows)
+            data = cur.fetchall()
+    return render_template("blog.html", data = data)
 
-    
-    return render_template("blog.html", data = data, ids = ids)
-
-@app.route('/discussion/', methods = ['POST', 'GET'])
-def discussion():
+@app.route('/discussion/<id>', methods = ['POST', 'GET'])
+def discussion(id):
     if request.method == 'GET':
+         
             cur = mysql.connection.cursor()
-            cur.execute("SELECT comment FROM blog_com WHERE post_id = %s",(1,))
+            cur.execute("SELECT comment FROM blog_com WHERE post_id = %s",(id,))
+            #print('data: ',data)
             comment =cur.fetchall()
+            cur.execute("SELECT subject FROM blog_post WHERE post_id= %s",(id,))
+            subject = cur.fetchall()
+            print(comment)
+            print(subject)
             cur.close()
-            return render_template("post_discussion.html", comment = comment)
+            return render_template("post_discussion.html", comment = comment, id =id, subject = subject)
 
     elif request.method =='POST':
             data = request.form.get("comment")
+            print(data)
             cur = mysql.connection.cursor()
-            cur.execute("INSERT INTO blog_com (post_id,comment) VALUES (%s,%s)", (1, data,))
-            mysql.connection.commit()
-            return redirect(url_for("discussion"))
-    
+            cur.execute("INSERT INTO blog_com (post_id,comment) VALUES (%s,%s)", (id, data,))
+
+            cur.execute("SELECT subject FROM blog_post WHERE post_id= %s",(id,))
+            subject = cur.fetchall()
+
+            cur.execute("SELECT comment FROM blog_com WHERE post_id = %s",(id,))
+            comments = cur.fetchall()
+
+            mysql.connection.commit() 
+            return render_template("post_discussion.html",comments = comments,subject = subject)
 
     
 
