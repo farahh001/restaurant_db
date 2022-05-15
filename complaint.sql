@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `complaint`;
 CREATE TABLE `complaint` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `complaint` varchar(45) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `complaint` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 /*!40101 SET character_set_client = @saved_cs_client */;

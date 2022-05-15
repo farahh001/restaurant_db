@@ -1,7 +1,7 @@
 
 
 
-{% include "header_complaint.html" %}
+{% include "header_inspect.html" %}
 
 <link href="{{url_for('static', filename = 'css2/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -15,7 +15,7 @@
 
 
 
-            <h2>Complaint Field <button type="button" class="btn btn-dark  pull-right" data-toggle="modal" data-target="#myModal">Add Complaint</button></h2>
+            
 
 
 
@@ -70,6 +70,7 @@
                     <td>
 
 
+               <a href="/updates/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
                
                 
 

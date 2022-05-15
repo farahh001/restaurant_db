@@ -74,6 +74,21 @@ def complaint():
     return render_template('complaint.html', complaint=data )
 
 
+@app.route('/complaints')
+def complaints():
+    #cur.execute("SELECT * FROM address")
+    #fetchdata =cur.fetchall()
+    #cur.close()
+    
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT  * FROM complaint")
+    data = cur.fetchall()
+    cur.close()
+
+    
+    return render_template('complaint_inspect.html', complaint=data )
+
+
 
 @app.route('/register', methods =['GET','POST'])
 def register():
@@ -172,6 +187,7 @@ def delete(id_data):
 
 
 
+
 @app.route('/update',methods=['POST','GET'])
 def update():
 
@@ -208,7 +224,7 @@ def updates():
             """, (name, complaint, id_data))
         flash("Data Updated Successfully")
         mysql.connection.commit()
-        return redirect(url_for('complaint'))
+        return redirect(url_for('complaints'))
 
 @app.route('/contact', methods = ['POST','GET'])
 def contact():
